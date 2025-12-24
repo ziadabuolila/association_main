@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -11,16 +12,12 @@ body {
     justify-content: center;
     min-height: 100vh;
     background: linear-gradient(90deg, #e2e2e2, #57ac5747);
-    margin: 0;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
 }
 /* ----- form login style css ----- */
-.login-container {
+/* .login-container {
     display: flex;
     align-items: center;
-    flex-direction: column;
-}
+} */
 .container {
     position: relative;
     width: 850px;
@@ -74,7 +71,7 @@ form {
 
 .input-box .login-right {
     width: 100%;
-    padding: 13px 13px 13px 50px;
+    padding: 13px;
     background: #eee;
     border: none;
     outline: none;
@@ -342,14 +339,14 @@ h2 {
 .login-msg.error {
     color: red;
     font-weight: 700;
-    background-color: #ffffff;
+    background-color: #e0e0e0;
     padding: 15px;
     border-radius: 11px;
 }
 .login-msg.success {
     color: #008000;
     font-weight: 700;
-    background-color: #ffffff;
+    background-color: #e0e0e0;
     padding: 15px;
     border-radius: 11px;
 }
