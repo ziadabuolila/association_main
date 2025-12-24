@@ -1,0 +1,355 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Cairo", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #e2e2e2, #57ac5747);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+/* ----- form login style css ----- */
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container {
+    position: relative;
+    width: 850px;
+    height: 550px;
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    margin: 20px;
+    overflow: hidden;
+}
+
+.form-box {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-align: center;
+    z-index: 1;
+    transition: .6s ease-in-out 1.2s, visibility 0s 1s;
+}
+
+.container.active .form-box {
+    right: 50%;
+}
+
+.form-box.register {
+    visibility: hidden;
+}
+
+.container.active .form-box.register {
+    visibility: visible;
+}
+
+form {
+    width: 100%;
+    padding: 25px;
+}
+
+.container h1 {
+    font-size: 36px;
+}
+
+.input-box {
+    position: relative;
+    margin: 30px 0;
+}
+
+.input-box .login-right {
+    width: 100%;
+    padding: 13px 13px 13px 50px;
+    background: #eee;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    direction: rtl;
+}
+
+.modal-password-change-form {
+    padding: 5px !important;
+}
+
+h2 {
+    text-align: center;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    background: #eee;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    direction: rtl;
+}
+
+.input-box .login-left {
+    width: 100%;
+    padding: 13px;
+    background: #eee;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    direction: rtl;
+}
+
+.input-box input::placeholder {
+    color: #888;
+    font-weight: 400;
+}
+
+.input-box svg {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #888;
+}
+
+.forgot-link {
+    margin: -15px 0 15px;
+    cursor: pointer;
+}
+
+.forgot-link a {
+    font-size: 14.5px;
+    color: #333;
+    text-decoration: none;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-password-change {
+    background: #fff;
+    padding: 20px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: translateY(-700px);
+    transition: transform 0.5s ease;
+}
+
+.modal-password-change.active {
+    transform: translateY(0);
+}
+
+.btn {
+    width: 100%;
+    height: 48px;
+    background: linear-gradient(135deg, #57ac57, #3d8c43);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(87, 172, 87, 0.3);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+}
+
+.btn:hover::after {
+    left: 100%;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #3d8c43, #2f6f35);
+    box-shadow: 0 6px 14px rgba(87, 172, 87, 0.35);
+    color: #fff;
+}
+
+.toggle-box {
+    width: 100%;
+    height: 100%;
+}
+
+.toggle-box::before {
+    content: '';
+    position: absolute;
+    left: -250%;
+    width: 300%;
+    height: 100%;
+    background: #57ac57;
+    border-radius: 100px;
+    z-index: 2;
+    transition: 1.8s ease-in-out;
+}
+
+.container.active .toggle-box::before {
+    left: 50%;
+}
+
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 2;
+    transition: .6s ease-in-out;
+}
+
+.toggle-left.toggle-left {
+    left: 0;
+    transition-delay: 1.2s;
+}
+
+.container.active .toggle-panel.toggle-left {
+    left: -50%;
+    transition-delay: .6s;
+}
+
+.toggle-panel.toggle-right {
+    right: -50%;
+    transition-delay: .6s;
+}
+
+.container.active .toggle-panel.toggle-right {
+    right: 0;
+    transition-delay: 1.2s;
+}
+
+.toggle-panel p {
+    margin-bottom: 20px;
+}
+
+.toggle-panel .btn {
+    width: 185px;
+    height: 46px;
+    background: transparent;
+    border: 2px solid #fff;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 650px) {
+    .container {
+        height: calc(100vh - 40px);
+    }
+    .form-box {
+        bottom: 0;
+        width: 100%;
+        height: 70%;
+    }
+    .container.active .form-box {
+        right: 0;
+        bottom: 30%;
+    }
+    .toggle-box::before {
+        left: 0;
+        top: -270%;
+        width: 100%;
+        height: 300%;
+        border-radius: 20vw;
+    }
+    .container.active .toggle-box::before {
+        left: 0;
+        top: 70%;
+    }
+    .toggle-panel {
+        width: 100%;
+        height: 30%;
+    }
+    .toggle-panel.toggle-left {
+        top: 0;
+    }
+    .container.active .toggle-panel.toggle-left {
+        left: 0;
+        top: -30%;
+    }
+    .toggle-panel.toggle-right {
+        right: 0;
+        bottom: -30%;
+    }
+    .container.active .toggle-panel.toggle-right {
+        bottom: 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .form-box {
+        padding: 20px;
+    }
+    .toggle-panel h1 {
+        font-size: 30px;
+    }
+}
+.login-msg {
+  display: none;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.login-msg.error {
+    color: red;
+    font-weight: 700;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 11px;
+}
+.login-msg.success {
+    color: #008000;
+    font-weight: 700;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 11px;
+}

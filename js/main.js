@@ -1,9 +1,58 @@
+// ----- open menu user -----
+document.addEventListener("DOMContentLoaded", () => {
+  const userCard = document.getElementById("userCard");
+  const userMenu = document.getElementById("userMenu");
+
+  userCard.addEventListener("click", (e) => {
+    e.stopPropagation();
+    userMenu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!userMenu.contains(e.target) && !userCard.contains(e.target)) {
+      userMenu.classList.remove("active");
+    }
+  });
+});
+const logoutBtn = document.getElementById("logoutBtn");
+const logoutOverlay = document.getElementById("logoutOverlay");
+
+logoutBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  logoutOverlay.classList.add("active");
+
+  document.body.classList.add("no-scroll");
+
+  setTimeout(() => {
+    window.location.href = "../login/log_in.html";
+  }, 3000);
+});
 // ----- Loader -----
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("loader").classList.add("hide");
   }, 2000);
 });
+// ---- modal ----
+const openBtnMenu = document.getElementById("openModalMenu");
+const modalOverlayMenu = document.getElementById("modalOverlayMenu");
+const modalBoxMenu = document.getElementById("modalBoxMenu");
+openBtnMenu.addEventListener("click", () => {
+  modalOverlayMenu.style.display = "flex";
+  setTimeout(() => {
+    modalBoxMenu.classList.add("active");
+  }, 50);
+});
+modalOverlayMenu.addEventListener("click", (e) => {
+  if (e.target === modalOverlayMenu) {
+    modalBoxMenu.classList.remove("active");
+    setTimeout(() => {
+      modalOverlayMenu.style.display = "none";
+    }, 500);
+  }
+});
+
 // ----- Drop Down Header -----
 const dropBtns = document.querySelectorAll(".drop-btn");
 dropBtns.forEach((btn) => {
@@ -13,6 +62,25 @@ dropBtns.forEach((btn) => {
     dropMenu.style.display =
       dropMenu.style.display === "flex" ? "none" : "block";
   });
+});
+const openBtnMenuProfile = document.getElementById("openModalMenuProfile");
+const modalOverlayMenuProfile = document.getElementById(
+  "modalOverlayMenuProfile"
+);
+const modalBoxMenuProfile = document.getElementById("modalBoxMenuProfile");
+openBtnMenuProfile.addEventListener("click", () => {
+  modalOverlayMenuProfile.style.display = "flex";
+  setTimeout(() => {
+    modalBoxMenuProfile.classList.add("active");
+  }, 50);
+});
+modalOverlayMenuProfile.addEventListener("click", (e) => {
+  if (e.target === modalOverlayMenuProfile) {
+    modalBoxMenuProfile.classList.remove("active");
+    setTimeout(() => {
+      modalOverlayMenuProfile.style.display = "none";
+    }, 500);
+  }
 });
 // ----- Menu Overlay -----
 const menuToggle = document.getElementById("menuToggleIcon");
@@ -81,4 +149,3 @@ setInterval(() => {
   let idx = (current + 1) % items.length;
   showSlide(idx);
 }, 5000);
-// ----- About img show-hide ( 5 ) -----

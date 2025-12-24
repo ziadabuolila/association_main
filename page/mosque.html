@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-language" content="ar" />
+    <meta
+      name="description"
+      content="جمعية الرحمة الخيرية بعزبة عمرو – مؤسسة خيرية غير ربحية تهدف لدعم الأسر الفقيرة، ورعاية الأيتام، وتقديم المساعدات الإنسانية، والخدمات المجتمعية."
+    />
+    <meta
+      name="keywords"
+      content="جمعية الرحمة, جمعية الرحمة الخيرية, عزبة عمرو, أعمال خيرية, تبرعات, كفالة أيتام, مساعدات إنسانية, جمعيات خيرية مصر, دعم الفقراء, تبرع الآن, حملات خيرية"
+    />
+    <meta name="author" content="جمعية الرحمة الخيرية بعزبة عمرو" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="جمعية الرحمة الخيرية بعزبة عمرو" />
+    <meta
+      property="og:description"
+      content="جمعية الرحمة الخيرية – خدمة المجتمع، دعم المحتاجين، ورعاية الأيتام بعزبة عمرو."
+    />
+    <meta property="og:image" content="img/logo.png" />
+    <meta property="og:url" content="index.html" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="جمعية الرحمة الخيرية بعزبة عمرو" />
+    <meta
+      name="twitter:description"
+      content="تقدم الجمعية خدمات خيرية وإنسانية لدعم المجتمع وخدمة المحتاجين."
+    />
+    <meta name="twitter:image" content="../img/association.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../img/association.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/association.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../img/association.png"
+    />
+    <link rel="icon" href="../img/association.png" />
+    <title>جمعية الرحمة الخيرية بعزبة عمرو</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-...=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      #notify {
+        position: fixed;
+        top: 20px;
+        right: -400px;
+        background: #377b41;
+        color: #fff;
+        padding: 18px 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px #0004;
+        font-size: 18px;
+        transition: 0.6s;
+        z-index: 9999;
+      }
+      #notify.show {
+        right: 20px;
+      }
+
+      .mosque_div {
+        padding: 60px 0 0 0;
+      }
+
+      section {
+        background: #fff;
+        border-radius: 16px;
+        padding: 30px 20px;
+        margin-bottom: 30px;
+        width: 95%;
+        max-width: 1100px;
+        margin-inline: auto;
+        border-top: 5px solid #377b41;
+        box-shadow: 0 0 15px #0002;
+      }
+
+      h2 {
+        text-align: center;
+        color: #377b41;
+        font-size: 28px;
+        margin-bottom: 25px;
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      @media (max-width: 600px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (min-width: 601px) and (max-width: 900px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 901px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .grid img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 0 10px #0001;
+      }
+
+      .box {
+        background: #fff;
+        border: 2px solid #377b41;
+        border-radius: 14px;
+        padding: 20px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .box span {
+        display: block;
+        margin-top: 8px;
+        font-size: 22px;
+        color: #377b41;
+      }
+
+      .activities .act h3 {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+      }
+
+      .services ul {
+        list-style: none;
+        padding: 0;
+        font-size: 20px;
+        text-align: center;
+        line-height: 2;
+      }
+
+      .donate-form {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        background: #fff;
+        padding: 25px;
+        border-radius: 16px;
+        border: 2px solid #377b41;
+        box-shadow: 0 0 15px #0001;
+      }
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+      .input-group label {
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 17px;
+      }
+      .input-group input,
+      .input-group select {
+        padding: 14px;
+        font-size: 17px;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        outline: none;
+        transition: 0.3s;
+        width: 100%;
+      }
+      .input-group input:focus,
+      .input-group select:focus {
+        border-color: #377b41;
+      }
+      .btn {
+        width: 100%;
+        padding: 15px;
+        font-size: 19px;
+        font-weight: 700;
+        color: #fff;
+        background: #377b41;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn:hover {
+        background: #2e6637;
+      }
+    </style>
+    <!-- ----- Header ----- -->
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">
+          <img src="../img/association.png" alt="جمعية الرحمة الخيرية" />
+          <span>جمعية الرحمة الخيرية<br />بعزبة عمرو</span>
+        </div>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="index.html"> الصفحة الرئيسية</a>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="drop-btn">
+                الجمعية
+                <i class="fa-solid fa-angle-down arrow"></i>
+              </a>
+              <ul class="drop-menu">
+                <li>
+                  <a href="about.html"> عن الجمعية</a>
+                </li>
+                <li>
+                  <a href="news.html"> أخبار الجمعية</a>
+                </li>
+                <li>
+                  <a href="members.html"> أعضاء الجمعية العمومية</a>
+                </li>
+                <li>
+                  <a href="archive.html"> أرشيف الجمعية</a>
+                </li>
+                <li>
+                  <a href="history.html"> سجل الجمعية</a>
+                </li>
+                <li>
+                  <a href="projects.html"> مشاريع الجمعية</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="drop-btn">
+                الفعاليات
+                <i class="fa-solid fa-angle-down arrow"></i>
+              </a>
+              <ul class="drop-menu">
+                <li>
+                  <a href="events.html"> الفعاليات</a>
+                </li>
+                <li>
+                  <a href="activities.html"> الأنشطة</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="drop-btn">
+                مجلس الإدارة
+                <i class="fa-solid fa-angle-down arrow"></i>
+              </a>
+              <ul class="drop-menu">
+                <li>
+                  <a href="nursery.html"> الحضانة</a>
+                </li>
+                <li>
+                  <a href="achievements.html"> الإنجازات</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="drop-btn">
+                الوسائط
+                <i class="fa-solid fa-angle-down arrow"></i>
+              </a>
+              <ul class="drop-menu">
+                <li>
+                  <a href="img.html"> الصور</a>
+                </li>
+                <li>
+                  <a href="video.html"> الفيديوهات</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="donations.html"> تبرعات</a>
+            </li>
+            <li>
+              <a href="mosque.html" class="active_header"> مسجد</a>
+            </li>
+            <li>
+              <a href="b_a_s.html"> الأقسام و التخصصات</a>
+            </li>
+            <li>
+              <a href="contact_us.html"> تواصل معنا </a>
+            </li>
+            <a href="log_in.html" class="link-page-login-btn" id="loginBtn">
+              <button class="login-btn">
+                تسجيل الدخول
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </button>
+            </a>
+
+            <div class="user-mini-card" id="userCard" style="display: none">
+              <p id="userName"></p>
+              <i class="fa fa-user"></i>
+            </div>
+            <div class="card" id="userMenu">
+              <ul class="list">
+                <a href="profile.html">
+                  <li class="element">
+                    <i class="fa fa-user"></i>
+                    <p class="label">الملف الشخصي</p>
+                  </li>
+                </a>
+                <a href="#" id="openModalMenu">
+                  <li class="element">
+                    <i class="fa fa-key"></i>
+                    <p class="label">تغيير كلمه المرور</p>
+                  </li>
+                </a>
+              </ul>
+              <div class="separator"></div>
+              <ul class="list">
+                <a href="#">
+                  <li class="element">
+                    <i class="fa fa-bell"></i>
+                    <p class="label">الإشعارات</p>
+                  </li>
+                </a>
+                <a href="#">
+                  <li class="element">
+                    <i class="fa fa-cog"></i>
+                    <p class="label">الإعدادات</p>
+                  </li>
+                </a>
+              </ul>
+              <div class="separator"></div>
+              <ul class="list">
+                <a href="#" id="logoutBtn">
+                  <li class="element logOut">
+                    <i class="fa fa-sign-out"></i>
+                    <p class="label">تسجيل الخروج</p>
+                  </li>
+                </a>
+              </ul>
+            </div>
+          </ul>
+        </nav>
+
+        <div class="menu-icon" id="menuToggleIcon">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+    </header>
+    <div class="modal-overlay" id="modalOverlayMenu">
+      <div class="modal-password-change" id="modalBoxMenu">
+        <form action="" class="modal-password-change-form">
+          <h2>تغير كلمة المرور</h2>
+          <div class="input-box">
+            <input type="email" placeholder="البريد الإلكتروني" required />
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="كلمة المرور" required />
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="تأكيد كلمة المرور" required />
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <button type="submit" class="btn">تغيير كلمة المرور</button>
+        </form>
+      </div>
+    </div>
+    <!-- ----- Bar Header ----- -->
+    <div id="progress-bar-container">
+      <div id="progress-bar">
+        مرحبا بكم , جمعية الرحمة الخيرية بعزبة عمرو ترحب بكم
+      </div>
+    </div>
+    <!-- ----- Overlay Menu ----- -->
+    <div id="overlayMenu"></div>
+    <!-- ----- Menu ----- -->
+    <nav id="sideMenu">
+      <div id="closeMenuBtn"><i class="fa-solid fa-xmark"></i></div>
+      <div id="menuLogoContainer">
+        <img
+          src="../img/association.png"
+          alt="جمعية الرحمة الخيرية"
+          id="menuLogo"
+        />
+        <span class="associationName">جميعة الرحمة الخيرية بعزبة عمرو</span>
+      </div>
+      <ul id="ul">
+        <li>
+          <a href="index.html"
+            ><i class="fa-solid fa-house"></i> الصفحة الرئيسية
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li class="menuDropdown">
+          <a href="javascript:void(0)"
+            ><i class="fa-solid fa-circle-info"></i> الجمعية
+            <i class="fa-solid fa-angle-left arrow"></i>
+          </a>
+          <ul class="dropdownMenu">
+            <li>
+              <a href="about.html"
+                ><i class="fa-solid fa-circle-info"></i> عن الجمعية
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="news.html"
+                ><i class="fa-solid fa-newspaper"></i> أخبار الجمعية
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="members.html">
+                <i class="fa-solid fa-users"></i> أعضاء الجمعية العمومية
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="archive.html">
+                <i class="fa-solid fa-archive"></i> أرشيف الجمعية
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="history.html">
+                <i class="fa-solid fa-history"></i> سجل الجمعية
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menuDropdown">
+          <a href="javascript:void(0)"
+            ><i class="fa-solid fa-calendar-days"></i> الفعاليات
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+          <ul class="dropdownMenu">
+            <li>
+              <a href="events.html"
+                ><i class="fa-solid fa-calendar-days"></i> الفعاليات
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="activities.html"
+                ><i class="fa-solid fa-person-running"></i> الأنشطة
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menuDropdown">
+          <a href="javascript:void(0)"
+            ><i class="fa-solid fa-people-group"></i> مجلس الإدارة
+            <i class="fa-solid fa-angle-left arrow"></i>
+          </a>
+          <ul class="dropdownMenu">
+            <li>
+              <a href="nursery.html"
+                ><i class="fa-solid fa-school"></i> الحضانة
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="achievements.html"
+                ><i class="fa-solid fa-medal"></i> الإنجازات
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menuDropdown">
+          <a href="javascript:void(0)"
+            ><i class="fa-solid fa-photo-film"></i> الوسائط
+            <i class="fa-solid fa-angle-left arrow"></i>
+          </a>
+          <ul class="dropdownMenu">
+            <li>
+              <a href="img.html"
+                ><i class="fa-solid fa-image"></i> الصور
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+            <li>
+              <a href="video.html"
+                ><i class="fa-solid fa-video"></i> الفيديوهات
+                <i class="fa-solid fa-angle-left"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="projects.html"
+            ><i class="fa-solid fa-hand-holding-heart"></i> مشاريع الجمعية
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li>
+          <a href="donations.html"
+            ><i class="fa-solid fa-hand-holding-heart donate-icon"></i> تبرعات
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li>
+          <a href="mosque.html" class="active"
+            ><i class="fa-solid fa-mosque"></i> مسجد
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li>
+          <a href="b_a_s.html"
+            ><i class="fa-solid fa-folder"></i> الأقسام و التخصصات
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+        <li>
+          <a href="contact_us.html"
+            ><i class="fa-solid fa-phone"></i> تواصل معنا
+            <i class="fa-solid fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- ----- Content Page ----- -->
+    <div class="logout-overlay" id="logoutOverlay">
+      <div class="loader">
+        <svg
+          id="cloud"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 100 100"
+        >
+          <defs>
+            <filter id="roundness">
+              <feGaussianBlur
+                in="SourceGraphic"
+                stdDeviation="1.5"
+              ></feGaussianBlur>
+              <feColorMatrix
+                values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -10"
+              ></feColorMatrix>
+            </filter>
+            <mask id="shapes">
+              <g fill="white">
+                <polygon points="50 37.5 80 75 20 75 50 37.5"></polygon>
+                <circle cx="20" cy="60" r="15"></circle>
+                <circle cx="80" cy="60" r="15"></circle>
+                <g>
+                  <circle cx="20" cy="60" r="15"></circle>
+                  <circle cx="20" cy="60" r="15"></circle>
+                  <circle cx="20" cy="60" r="15"></circle>
+                </g>
+              </g>
+            </mask>
+            <mask id="clipping" clipPathUnits="userSpaceOnUse">
+              <g id="lines" filter="url(#roundness)">
+                <g mask="url(#shapes)" stroke="white">
+                  <line x1="-50" y1="-40" x2="150" y2="-40"></line>
+                  <line x1="-50" y1="-31" x2="150" y2="-31"></line>
+                  <line x1="-50" y1="-22" x2="150" y2="-22"></line>
+                  <line x1="-50" y1="-13" x2="150" y2="-13"></line>
+                  <line x1="-50" y1="-4" x2="150" y2="-4"></line>
+                  <line x1="-50" y1="5" x2="150" y2="5"></line>
+                  <line x1="-50" y1="14" x2="150" y2="14"></line>
+                  <line x1="-50" y1="23" x2="150" y2="23"></line>
+                  <line x1="-50" y1="32" x2="150" y2="32"></line>
+                  <line x1="-50" y1="41" x2="150" y2="41"></line>
+                  <line x1="-50" y1="50" x2="150" y2="50"></line>
+                  <line x1="-50" y1="59" x2="150" y2="59"></line>
+                  <line x1="-50" y1="68" x2="150" y2="68"></line>
+                  <line x1="-50" y1="77" x2="150" y2="77"></line>
+                  <line x1="-50" y1="86" x2="150" y2="86"></line>
+                  <line x1="-50" y1="95" x2="150" y2="95"></line>
+                  <line x1="-50" y1="104" x2="150" y2="104"></line>
+                  <line x1="-50" y1="113" x2="150" y2="113"></line>
+                  <line x1="-50" y1="122" x2="150" y2="122"></line>
+                  <line x1="-50" y1="131" x2="150" y2="131"></line>
+                  <line x1="-50" y1="140" x2="150" y2="140"></line>
+                </g>
+              </g>
+            </mask>
+          </defs>
+          <rect
+            x="0"
+            y="0"
+            width="100"
+            height="100"
+            rx="0"
+            ry="0"
+            mask="url(#clipping)"
+          ></rect>
+          <g>
+            <path
+              d="M33.52,68.12 C35.02,62.8 39.03,58.52 44.24,56.69 C49.26,54.93 54.68,55.61 59.04,58.4 C59.04,58.4 56.24,60.53 56.24,60.53 C55.45,61.13 55.68,62.37 56.63,62.64 C56.63,62.64 67.21,65.66 67.21,65.66 C67.98,65.88 68.75,65.3 68.74,64.5 C68.74,64.5 68.68,53.5 68.68,53.5 C68.67,52.51 67.54,51.95 66.75,52.55 C66.75,52.55 64.04,54.61 64.04,54.61 C57.88,49.79 49.73,48.4 42.25,51.03 C35.2,53.51 29.78,59.29 27.74,66.49 C27.29,68.08 28.22,69.74 29.81,70.19 C30.09,70.27 30.36,70.31 30.63,70.31 C31.94,70.31 33.14,69.44 33.52,68.12Z"
+            ></path>
+            <path
+              d="M69.95,74.85 C68.35,74.4 66.7,75.32 66.25,76.92 C64.74,82.24 60.73,86.51 55.52,88.35 C50.51,90.11 45.09,89.43 40.73,86.63 C40.73,86.63 43.53,84.51 43.53,84.51 C44.31,83.91 44.08,82.67 43.13,82.4 C43.13,82.4 32.55,79.38 32.55,79.38 C31.78,79.16 31.02,79.74 31.02,80.54 C31.02,80.54 31.09,91.54 31.09,91.54 C31.09,92.53 32.22,93.09 33.01,92.49 C33.01,92.49 35.72,90.43 35.72,90.43 C39.81,93.63 44.77,95.32 49.84,95.32 C52.41,95.32 55,94.89 57.51,94.01 C64.56,91.53 69.99,85.75 72.02,78.55 C72.47,76.95 71.54,75.3 69.95,74.85Z"
+            ></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div id="notify"></div>
+
+    <div class="mosque_div">
+      <!-- مواقيت الصلاة -->
+      <section class="pray-times">
+        <h2>مواقيت الصلاة اليوم</h2>
+        <div class="grid" id="prayerGrid">
+          <div class="box">الفجر<br /><span id="fajr">--:--</span></div>
+          <div class="box">الظهر<br /><span id="dhuhr">--:--</span></div>
+          <div class="box">العصر<br /><span id="asr">--:--</span></div>
+          <div class="box">المغرب<br /><span id="maghrib">--:--</span></div>
+          <div class="box">العشاء<br /><span id="isha">--:--</span></div>
+        </div>
+      </section>
+
+      <!-- أنشطة المسجد -->
+      <section class="activities">
+        <h2>أنشطة المسجد</h2>
+        <div class="grid">
+          <div class="act">
+            <img
+              src="https://images.unsplash.com/photo-1533000971552-6a962ff0b9f1?auto=format&fit=crop&w=800&q=60"
+            />
+            <h3>تحفيظ القرآن</h3>
+          </div>
+          <div class="act">
+            <img
+              src="https://images.unsplash.com/photo-1600674479095-4c554a6c0eef?auto=format&fit=crop&w=800&q=60"
+            />
+            <h3>دروس العلم</h3>
+          </div>
+          <div class="act">
+            <img
+              src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=60"
+            />
+            <h3>دعم المحتاجين</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- خدمات المسجد -->
+      <section class="services">
+        <h2>خدمات المسجد</h2>
+        <ul>
+          <li>عقد الزواج الشرعي</li>
+          <li>المحاضرات والدروس اليومية</li>
+          <li>دروس الأطفال</li>
+          <li>كفالة الأسر المحتاجة</li>
+          <li>صندوق التبرعات</li>
+        </ul>
+      </section>
+    </div>
+    <!-- ----- Footer ----- -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <p>
+            جميع الحقوق محفوظة لدى
+            <a href="index.html" class="link_page_one_footer"
+              >جمعية الرحمة الخيرية بعزبة عمرو</a
+            >
+            © 2025
+          </p>
+        </div>
+        <div class="footer-right">
+          <a href="#" class="social facebook"
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+          <a href="#" class="social whatsapp"
+            ><i class="fa-brands fa-whatsapp"></i
+          ></a>
+          <a href="#" class="social instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a href="#" class="social youtube"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+    <!-- ----- Scripts ----- -->
+    <script>
+      const city = "Cairo";
+      const country = "Egypt";
+
+      // دالة تحويل الوقت 12 ساعة
+      function formatTo12Hour(time) {
+        let [hours, minutes] = time.split(":");
+        hours = parseInt(hours);
+        const period = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        return `${hours}:${minutes} ${period}`;
+      }
+
+      let prayerTimes = {};
+
+      // جلب مواقيت الصلاة
+      fetch(
+        `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=5`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          prayerTimes = data.data.timings;
+
+          // عرضها في الصفحة
+          document.getElementById("fajr").innerText = formatTo12Hour(
+            prayerTimes.Fajr
+          );
+          document.getElementById("dhuhr").innerText = formatTo12Hour(
+            prayerTimes.Dhuhr
+          );
+          document.getElementById("asr").innerText = formatTo12Hour(
+            prayerTimes.Asr
+          );
+          document.getElementById("maghrib").innerText = formatTo12Hour(
+            prayerTimes.Maghrib
+          );
+          document.getElementById("isha").innerText = formatTo12Hour(
+            prayerTimes.Isha
+          );
+
+          // بدء التحقق المستمر لكل دقيقة
+          setInterval(checkPrayerTime, 1000 * 60);
+        })
+        .catch((err) => console.error("خطأ في جلب مواقيت الصلاة:", err));
+
+      // دالة تشغيل الصوت
+      function playSound(src) {
+        const audio = new Audio(src);
+        audio.play();
+      }
+
+      function checkPrayerTime() {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+
+        // لكل صلاة
+        for (let prayer in prayerTimes) {
+          const [hour24, minute] = prayerTimes[prayer].split(":").map(Number);
+
+          // قبل 5 دقائق
+          const beforeHour = hour24;
+          const beforeMinute = minute - 5;
+
+          if (
+            beforeMinute >= 0 &&
+            currentHour === beforeHour &&
+            currentMinute === beforeMinute
+          ) {
+            playSound("sounds/before.mp3");
+            console.log(`اقتربت صلاة ${prayer}`);
+          }
+
+          // وقت الصلاة
+          if (currentHour === hour24 && currentMinute === minute) {
+            playSound("sounds/adhaan.mp3");
+            console.log(`حان الآن موعد أذان ${prayer}`);
+          }
+        }
+      }
+    </script>
+
+    <script>
+      const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+      const loginBtn = document.getElementById("loginBtn");
+      const userCard = document.getElementById("userCard");
+      const userName = document.getElementById("userName");
+
+      let deletedMsg = document.getElementById("accountDeletedMsg");
+      let disabledMsg = document.getElementById("accountDisabledMsg"); // رسالة تعطيل (اختياري)
+
+      if (loggedUser) {
+        const checkUserStatus = setInterval(() => {
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+
+          const userStillExists = users.find(
+            (u) => u.email === loggedUser.email
+          );
+
+          if (!userStillExists) {
+            if (deletedMsg) deletedMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          if (userStillExists.status !== "مفعل") {
+            if (disabledMsg) disabledMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          userCard.style.display = "flex";
+          userName.innerText = userStillExists.username;
+          loginBtn.style.display = "none";
+        }, 1000);
+      } else {
+        userCard.style.display = "none";
+        loginBtn.style.display = "inline-block";
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

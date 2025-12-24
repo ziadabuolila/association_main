@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/association.png" />
+    <link rel="stylesheet" href="../css/table_login.css" />
+    <title>المسجلين في جمعية الرحمة الخيرية بعزبة عمرو</title>
+    <style>
+      /* رسالة الخطأ / النجاح */
+      .status-msg {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+
+      .status-msg.error {
+        color: #d8000c;
+      }
+
+      .status-msg.success {
+        color: #007f00;
+      }
+
+      .status-msg span.icon {
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../img/association.png" alt="Logo" draggable="false" />
+      </div>
+      <div class="company_name">
+        <h4>جمعية الرحمة الخيرية بعزبة عمرو</h4>
+      </div>
+    </header>
+
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اسم المستخدم</th>
+            <th>البريد الإلكتروني</th>
+            <th>كلمة المرور</th>
+            <th>منشئ في</th>
+            <th>حالة المستخدم</th>
+            <th>الخيارات</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const tableBody = document.getElementById("tableBody");
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      function renderTable() {
+        tableBody.innerHTML = "";
+
+        users.forEach((user, index) => {
+          if (!user.status) user.status = "مفعل";
+
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td>${index + 1}</td>
+
+            <td>
+              <span class="text">${user.username}</span>
+              <input class="edit-input" value="${user.username}" style="display:none">
+            </td>
+
+            <td>
+              <span class="text">${user.email}</span>
+              <input class="edit-input" value="${user.email}" style="display:none">
+            </td>
+
+            <td>
+              <span class="text">${"*".repeat(user.password.length)}</span>
+              <input class="edit-input" value="${user.password}" style="display:none">
+              <div class="status-msg" style="display:none">
+                <span class="icon"></span>
+                <span class="msg-text"></span>
+              </div>
+            </td>
+
+            <td>${user.createdAt}</td>
+
+            <td>
+              <span class="status-text ${user.status === "مفعل" ? "active" : "inactive"}">
+                ${user.status}
+              </span>
+              <select class="status-select" style="display:none">
+                <option value="مفعل" ${user.status === "مفعل" ? "selected" : ""}>مفعل</option>
+                <option value="غير مفعل" ${user.status === "غير مفعل" ? "selected" : ""}>غير مفعل</option>
+              </select>
+            </td>
+
+            <td>
+              <button class="edit-btn" onclick="editRow(this, ${index})">تعديل</button>
+              <button class="delete-btn" onclick="deleteRow(${index})">حذف</button>
+            </td>
+          `;
+
+          tableBody.appendChild(tr);
+        });
+
+        localStorage.setItem("users", JSON.stringify(users));
+      }
+
+      function deleteRow(index) {
+        if (!confirm("هل أنت متأكد من الحذف؟")) return;
+        users.splice(index, 1);
+        localStorage.setItem("users", JSON.stringify(users));
+        renderTable();
+      }
+
+      function editRow(button, index) {
+        const row = button.closest("tr");
+        const texts = row.querySelectorAll(".text");
+        const inputs = row.querySelectorAll(".edit-input");
+        const statusText = row.querySelector(".status-text");
+        const statusSelect = row.querySelector(".status-select");
+        const statusMsg = row.querySelector(".status-msg");
+        const icon = statusMsg.querySelector(".icon");
+        const msgText = statusMsg.querySelector(".msg-text");
+
+        if (button.innerText === "تعديل") {
+          texts.forEach((t) => (t.style.display = "none"));
+          inputs.forEach((i) => (i.style.display = "block"));
+          inputs[2].type = "text";
+          statusMsg.style.display = "none";
+
+          statusText.style.display = "none";
+          statusSelect.style.display = "block";
+
+          button.innerText = "حفظ";
+          button.classList.add("save-btn");
+        } else {
+          if (inputs[2].value.length < 8) {
+            icon.innerText = "❌";
+            msgText.innerText = "كلمة المرور يجب أن تكون 8 أحرف أو أكثر";
+            statusMsg.className = "status-msg error";
+            statusMsg.style.display = "flex";
+
+            setTimeout(() => {
+              statusMsg.style.display = "none";
+            }, 2000);
+
+            return;
+          }
+
+          users[index].username = inputs[0].value;
+          users[index].email = inputs[1].value;
+          users[index].password = inputs[2].value;
+          users[index].status = statusSelect.value;
+
+          icon.innerText = "✅";
+          msgText.innerText = "تم حفظ البيانات بنجاح";
+          statusMsg.className = "status-msg success";
+          statusMsg.style.display = "flex";
+
+          setTimeout(() => {
+            statusMsg.style.display = "none";
+            renderTable();
+          }, 2000);
+
+          localStorage.setItem("users", JSON.stringify(users));
+        }
+      }
+
+      renderTable();
+    </script>
+  </body>
+</html>

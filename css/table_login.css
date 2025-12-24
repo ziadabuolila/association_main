@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+body {
+    font-family: "Cairo", sans-serif;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 3px solid #1f1f1e;
+    padding: 10px 0 0 0;
+}
+
+@media (max-width: 415px) {
+    header {
+        flex-direction: column !important;
+    }
+}
+
+header img {
+    width: 90px;
+}
+
+.table-container {
+    margin: auto;
+    overflow-x: auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 20px 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #6ab13d;
+    font-weight: 500;
+}
+
+th {
+    background-color: #5fad4a;
+    color: #1f1f1e;
+    font-weight: bold;
+}
+
+tr {
+    background-color: #1f1f1e;
+    border-bottom: 1px solid #fff;
+}
+.edit-btn, .delete-btn, .save-btn {
+  padding: 6px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: Cairo;
+}
+
+.edit-btn {
+  background: #0d6efd;
+  color: #fff;
+}
+
+.save-btn {
+  background: #198754;
+  color: #fff;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: #fff;
+  margin-left: 5px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 5px;
+}
+.edit-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: "Cairo", sans-serif;
+  color: #1f2937;
+  background: #f9fafb;
+  border: 1.8px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.25s ease;
+  direction: rtl;
+}
+
+.edit-input:focus {
+  background: #ffffff;
+  border-color: #377b41;
+  box-shadow: 0 0 0 3px rgba(55, 123, 65, 0.15);
+}
+
+.edit-input:hover {
+  border-color: #377b41;
+}
+
+.edit-input::placeholder {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+table .edit-input {
+  margin: 3px 0;
+}
+
+.edit-input {
+  animation: fadeInput 0.3s ease;
+}
+
+@keyframes fadeInput {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-select {
+  width: 120px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: "Cairo", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #377b41;
+  box-shadow: 0 0 0 2px rgba(55, 123, 65, 0.2);
+}
+
+.status-text {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.status-text.active {
+  background-color: #e6f4ea;
+  color: #2e7d32;
+}
+
+.status-text.inactive {
+  background-color: #fdecea;
+  color: #c62828;
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-language" content="ar" />
+    <meta
+      name="description"
+      content="جمعية الرحمة الخيرية بعزبة عمرو – مؤسسة خيرية غير ربحية تهدف لدعم الأسر الفقيرة، ورعاية الأيتام، وتقديم المساعدات الإنسانية، والخدمات المجتمعية."
+    />
+    <meta
+      name="keywords"
+      content="جمعية الرحمة, جمعية الرحمة الخيرية, عزبة عمرو, أعمال خيرية, تبرعات, كفالة أيتام, مساعدات إنسانية, جمعيات خيرية مصر, دعم الفقراء, تبرع الآن, حملات خيرية"
+    />
+    <meta name="author" content="جمعية الرحمة الخيرية بعزبة عمرو" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="جمعية الرحمة الخيرية بعزبة عمرو" />
+    <meta
+      property="og:description"
+      content="جمعية الرحمة الخيرية – خدمة المجتمع، دعم المحتاجين، ورعاية الأيتام بعزبة عمرو."
+    />
+    <meta property="og:image" content="img/logo.png" />
+    <meta property="og:url" content="index.html" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="جمعية الرحمة الخيرية بعزبة عمرو" />
+    <meta
+      name="twitter:description"
+      content="تقدم الجمعية خدمات خيرية وإنسانية لدعم المجتمع وخدمة المحتاجين."
+    />
+    <meta name="twitter:image" content="../img/association.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../img/association.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/association.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../img/association.png"
+    />
+    <link rel="icon" href="../img/association.png" />
+    <title>تسجيل دخول جديد</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-...=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="login-container">
+      <div id="errorUser" class="login-msg error">
+        البريد الإلكتروني أو كلمة المرور غير صحيحة
+      </div>
+      <div id="errorStatus" class="login-msg error">
+        حسابك غير مفعل، برجاء الاتصال بخدمة العملاء لتفعيل حسابك
+      </div>
+      <div
+        id="registerStatus"
+        class="login-msg success"
+        style="display: none"
+      ></div>
+      <div class="container">
+        <div class="form-box login">
+          <form>
+            <h1>تسجيل الدخول</h1>
+            <div class="input-box">
+              <input
+                type="email"
+                id="loginEmail"
+                name="email"
+                class="login-right"
+                placeholder="البريد الإلكتروني"
+                required
+              />
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="input-box">
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                class="login-right"
+                placeholder="كلمة المرور"
+                required
+              />
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <p
+              id="loginMessage"
+              style="display: none; margin-top: 10px; font-size: 14px"
+            ></p>
+            <div class="forgot-link">
+              <a id="openModal">نسيت كلمة المرور ؟</a>
+            </div>
+            <button type="button" class="btn" onclick="loginUser()">
+              تسجيل
+            </button>
+          </form>
+        </div>
+        <div class="modal-overlay" id="modalOverlay">
+          <div class="modal-password-change" id="modalBox">
+            <form
+              class="modal-password-change-form"
+              onsubmit="changePassword(event)"
+            >
+              <h2>تغير كلمة المرور</h2>
+
+              <div class="input-box">
+                <input
+                  type="email"
+                  id="modalEmail"
+                  placeholder="البريد الإلكتروني"
+                  required
+                />
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+
+              <div class="input-box">
+                <input
+                  type="password"
+                  id="modalNewPassword"
+                  placeholder="كلمة المرور"
+                  required
+                />
+                <i class="fa-solid fa-lock"></i>
+              </div>
+
+              <div class="input-box">
+                <input
+                  type="password"
+                  id="modalConfirmPassword"
+                  placeholder="تأكيد كلمة المرور"
+                  required
+                />
+                <i class="fa-solid fa-lock"></i>
+              </div>
+
+              <p
+                id="modalMessage"
+                style="
+                  color: red;
+                  display: none;
+                  margin-top: 5px;
+                  text-align: center;
+                  padding: 0 0 25px 0;
+                "
+              ></p>
+
+              <button type="submit" class="btn">تغيير كلمة المرور</button>
+            </form>
+          </div>
+        </div>
+        <div class="form-box register">
+          <form action="">
+            <h1>تسجيل حساب جديد</h1>
+            <div class="input-box">
+              <input
+                type="text"
+                id="username"
+                class="login-left"
+                placeholder="اسم المستخدم"
+                required
+              />
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-box">
+              <input
+                type="email"
+                id="email"
+                class="login-left"
+                placeholder="البريد الإلكتروني"
+                required
+              />
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <div class="input-box">
+              <input
+                type="password"
+                id="password"
+                class="login-left"
+                placeholder="كلمة المرور"
+                required
+              />
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="input-box">
+              <input
+                type="password"
+                id="confirmPassword"
+                class="login-left"
+                placeholder="تأكيد كلمه المرور"
+                required
+              />
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <button type="button" class="btn" onclick="saveUser()">
+              تسجيل حساب جديد
+            </button>
+          </form>
+        </div>
+        <div class="toggle-box">
+          <div class="toggle-panel toggle-left">
+            <h1>! مرحبا بك</h1>
+            <p>ليس لديك حساب ؟</p>
+            <button class="btn register-btn">إنشاء حساب جديد</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>مرحبا بعودتك</h1>
+            <p>لديك حساب بالفعل ؟</p>
+            <button class="btn login-btn">تسجيل الدخول</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ----- Scripts ----- -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
+    <script src="../js/login.js"></script>
+  </body>
+</html>
