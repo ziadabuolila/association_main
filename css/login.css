@@ -14,10 +14,6 @@ body {
     background: linear-gradient(90deg, #e2e2e2, #57ac5747);
 }
 /* ----- form login style css ----- */
-/* .login-container {
-    display: flex;
-    align-items: center;
-} */
 .container {
     position: relative;
     width: 850px;
@@ -57,7 +53,7 @@ body {
 
 form {
     width: 100%;
-    padding: 25px;
+    padding: 15px;
 }
 
 .container h1 {
