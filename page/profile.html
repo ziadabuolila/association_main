@@ -678,6 +678,18 @@
 
       let deletedMsg = document.getElementById("accountDeletedMsg");
       let disabledMsg = document.getElementById("accountDisabledMsg"); // رسالة تعطيل (اختياري)
+      function formatDateTime(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleString("ar-EG", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+      }
 
       // دالة لاستخراج اسم المتصفح
       function getBrowserInfo() {
@@ -760,9 +772,15 @@
                 : "غير مفعل";
 
           // عرض آخر تسجيل دخول
-          if (lastLoginDiv)
-            lastLoginDiv.textContent =
-              userStillExists.lastLogin || "لم يتم تسجيل الدخول بعد";
+          if (lastLoginDiv) {
+            if (userStillExists.lastLogin) {
+              lastLoginDiv.textContent = formatDateTime(
+                userStillExists.lastLogin
+              );
+            } else {
+              lastLoginDiv.textContent = "لم يتم تسجيل الدخول بعد";
+            }
+          }
 
           // عرض الجهاز والمتصفح
           if (devicesDiv)

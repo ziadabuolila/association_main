@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="../img/association.png" />
     <link rel="stylesheet" href="../css/table_login.css" />
     <title>المسجلين في جمعية الرحمة الخيرية بعزبة عمرو</title>
+
     <style>
       .status-msg {
         display: flex;
@@ -20,12 +21,9 @@
       .status-msg.success {
         color: #007f00;
       }
-      .status-msg span.icon {
-        font-weight: bold;
-        font-size: 16px;
-      }
     </style>
   </head>
+
   <body>
     <header>
       <div class="logo">
@@ -58,19 +56,19 @@
       const tableBody = document.getElementById("tableBody");
       let users = JSON.parse(localStorage.getItem("users")) || [];
 
-      const LOCK_TIME = 60 * 1000; // وقت الحظر المؤقت
+      const LOCK_TIME = 60 * 1000;
 
-      function formatDateTime(date) {
-        const options = {
+      function formatDateTime(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("ar-EG", {
           weekday: "long",
           year: "numeric",
-          month: "short",
+          month: "long",
           day: "numeric",
           hour: "2-digit",
           minute: "2-digit",
           second: "2-digit",
-        };
-        return date.toLocaleDateString("ar-EG", options);
+        });
       }
 
       function renderTable() {
@@ -80,54 +78,42 @@
           if (!user.status) user.status = "مفعل";
           if (user.failedAttempts === undefined) user.failedAttempts = 0;
 
-          const lastLogin = user.lastLogin
-            ? formatDateTime(new Date(user.lastLogin))
-            : "-";
+          const lastLoginText = user.lastLogin
+            ? formatDateTime(user.lastLogin)
+            : "لم يتم تسجيل الدخول بعد";
 
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>${index + 1}</td>
-            <td><span class="text">${user.username}</span>
-            <input class="edit-input" value="${
-              user.username
-            }" style="display:none"></td>
 
-            <td><span class="text">${user.email}</span>
-            <input class="edit-input" value="${
-              user.email
-            }" style="display:none"></td>
+            <td>
+              <span class="text">${user.username}</span>
+              <input class="edit-input" value="${user.username}" style="display:none">
+            </td>
+
+            <td>
+              <span class="text">${user.email}</span>
+              <input class="edit-input" value="${user.email}" style="display:none">
+            </td>
 
             <td>
               <span class="text">${"*".repeat(user.password.length)}</span>
-              <input class="edit-input" value="${
-                user.password
-              }" style="display:none">
-              <div class="status-msg" style="display:none">
-                <span class="icon"></span>
-                <span class="msg-text"></span>
-              </div>
+              <input class="edit-input" value="${user.password}" style="display:none">
             </td>
 
-            <td>${user.createdAt}</td>
-            <td>${lastLogin}</td>
+            <td>${user.createdAt || "-"}</td>
+            <td>${lastLoginText}</td>
 
             <td>
               <span class="status-text ${
                 user.status === "مفعل" ? "active" : "inactive"
               }">${user.status}</span>
+
               <select class="status-select" style="display:none">
-                <option value="مفعل" ${
-                  user.status === "مفعل" ? "selected" : ""
-                }>مفعل</option>
-                <option value="غير مفعل" ${
-                  user.status === "غير مفعل" ? "selected" : ""
-                }>غير مفعل</option>
-                <option value="موقوف مؤقتًا" ${
-                  user.status === "موقوف مؤقتًا" ? "selected" : ""
-                }>موقوف مؤقتًا</option>
-                <option value="موقوف نهائيًا" ${
-                  user.status === "موقوف نهائيًا" ? "selected" : ""
-                }>موقوف نهائيًا</option>
+                <option value="مفعل" ${user.status === "مفعل" ? "selected" : ""}>مفعل</option>
+                <option value="غير مفعل" ${user.status === "غير مفعل" ? "selected" : ""}>غير مفعل</option>
+                <option value="موقوف مؤقتًا" ${user.status === "موقوف مؤقتًا" ? "selected" : ""}>موقوف مؤقتًا</option>
+                <option value="موقوف نهائيًا" ${user.status === "موقوف نهائيًا" ? "selected" : ""}>موقوف نهائيًا</option>
               </select>
             </td>
 
@@ -136,6 +122,7 @@
               <button class="delete-btn" onclick="deleteRow(${index})">حذف</button>
             </td>
           `;
+
           tableBody.appendChild(tr);
         });
 
@@ -154,8 +141,6 @@
           inputs.forEach((i) => (i.style.display = "block"));
           select.style.display = "block";
           statusText.style.display = "none";
-
-          select.value = users[index].status;
           btn.innerText = "حفظ";
         } else {
           if (inputs[2].value.length < 8) {
@@ -171,11 +156,6 @@
           if (select.value === "موقوف مؤقتًا") {
             users[index].tempBlockedUntil = Date.now() + LOCK_TIME;
           } else {
-            delete users[index].tempBlockedUntil;
-          }
-
-          if (select.value === "مفعل") {
-            users[index].failedAttempts = 0;
             delete users[index].tempBlockedUntil;
           }
 
