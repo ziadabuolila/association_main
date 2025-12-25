@@ -69,6 +69,31 @@
     />
   </head>
   <body>
+    <!-- TEMP LOCK -->
+    <div id="tempLockOverlay">
+      <div class="lock-box">
+        <div class="lock-title">⚠️ تم قفل الحساب مؤقتًا ⚠️</div>
+        <div class="lock-text">
+          لأنك قمت بإدخال بيانات خاطئة<br />
+          وتجاوزت الحد الأقصى للمحاولات<br />
+          سيتم فتح حسابك مرة أخرى بعد
+        </div>
+        <div class="lock-timer" id="countdown">01:00</div>
+      </div>
+    </div>
+
+    <!-- PERMANENT LOCK -->
+    <div id="permLockOverlay">
+      <div class="lock-box">
+        <div class="lock-title">⚠️ تم قفل الحساب نهائيًا ⚠️</div>
+        <div class="lock-text">
+          لأنك قمت بإدخال بيانات خاطئة<br />
+          وتجاوزت الحد الأقصى للمحاولات<br />
+          برجاء الاتصال بخدمة العملاء
+        </div>
+      </div>
+    </div>
+
     <div class="container">
       <div class="form-box login">
         <form>
