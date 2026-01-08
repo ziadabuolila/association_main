@@ -37,7 +37,11 @@
       sizes="16x16"
       href="../img/association.png"
     />
-    <link rel="apple-touch-icon" sizes="180x180" href="../img/association.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/association.png"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -166,7 +170,11 @@
             <li>
               <a href="contact_us.html"> تواصل معنا </a>
             </li>
-            <a href="../login/log_in.html" class="link-page-login-btn" id="loginBtn">
+            <a
+              href="../login/log_in.html"
+              class="link-page-login-btn"
+              id="loginBtn"
+            >
               <button class="login-btn">
                 تسجيل الدخول
                 <i class="fa-solid fa-right-to-bracket"></i>
@@ -189,21 +197,6 @@
                   <li class="element">
                     <i class="fa fa-key"></i>
                     <p class="label">تغيير كلمه المرور</p>
-                  </li>
-                </a>
-              </ul>
-              <div class="separator"></div>
-              <ul class="list">
-                <a href="#">
-                  <li class="element">
-                    <i class="fa fa-bell"></i>
-                    <p class="label">الإشعارات</p>
-                  </li>
-                </a>
-                <a href="#">
-                  <li class="element">
-                    <i class="fa fa-cog"></i>
-                    <p class="label">الإعدادات</p>
                   </li>
                 </a>
               </ul>
@@ -250,7 +243,9 @@
             <span class="msg-text"></span>
           </div>
 
-          <button type="submit" class="btn" onclick="location.reload()">تغيير كلمة المرور</button>
+          <button type="submit" class="btn" onclick="location.reload()">
+            تغيير كلمة المرور
+          </button>
         </form>
       </div>
     </div>
@@ -425,7 +420,7 @@
         font-weight: bold;
       "
     >
-      تم حذف حسابك — سيتم الخروج بعد 2 ثانية
+      تم حذف حسابك — سيتم الخروج من الموقع
     </p>
 
     <div class="logout-overlay" id="logoutOverlay">
@@ -550,7 +545,7 @@
           />
         </div>
         <div class="carousel-item">
-          <img  
+          <img
             src="../img/services/7.png"
             alt="Img Services Association"
             draggable="false"
@@ -604,62 +599,99 @@
       </div>
     </footer>
     <!-- ----- Scripts ----- -->
-<script>
-  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    <script>
+      // ----- Slider Img Home -----
+      const items = document.querySelectorAll(".carousel-item");
+      const indicators = document.querySelectorAll(".carousel-indicators span");
+      let current = 0;
 
-  const loginBtn = document.getElementById("loginBtn");
-  const userCard = document.getElementById("userCard");
-  const userName = document.getElementById("userName");
+      function showSlide(index) {
+        items.forEach((i) => i.classList.remove("active"));
+        indicators.forEach((i) => i.classList.remove("active"));
 
-  let deletedMsg = document.getElementById("accountDeletedMsg");
-  let disabledMsg = document.getElementById("accountDisabledMsg");
-  if (loggedUser) {
-    const checkUserStatus = setInterval(() => {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
+        items[index].classList.add("active");
+        indicators[index].classList.add("active");
 
-      const userStillExists = users.find(
-        (u) => u.email === loggedUser.email
-      );
-
-      if (!userStillExists) {
-        if (deletedMsg) deletedMsg.style.display = "block";
-
-        userCard.style.display = "none";
-        loginBtn.style.display = "none";
-
-        clearInterval(checkUserStatus);
-
-        setTimeout(() => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "../login/log_in.html";
-        }, 2000);
-        return;
+        current = index;
       }
 
-      if (userStillExists.status !== "مفعل") {
-        if (disabledMsg) disabledMsg.style.display = "block";
+      document.querySelector(".next").onclick = () => {
+        let idx = (current + 1) % items.length;
+        showSlide(idx);
+      };
 
+      document.querySelector(".prev").onclick = () => {
+        let idx = (current - 1 + items.length) % items.length;
+        showSlide(idx);
+      };
+
+      indicators.forEach((ind) => {
+        ind.addEventListener("click", () => {
+          showSlide(+ind.getAttribute("data-slide"));
+        });
+      });
+
+      setInterval(() => {
+        let idx = (current + 1) % items.length;
+        showSlide(idx);
+      }, 5000);
+    </script>
+    <script>
+      const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+      const loginBtn = document.getElementById("loginBtn");
+      const userCard = document.getElementById("userCard");
+      const userName = document.getElementById("userName");
+
+      let deletedMsg = document.getElementById("accountDeletedMsg");
+      let disabledMsg = document.getElementById("accountDisabledMsg");
+      if (loggedUser) {
+        const checkUserStatus = setInterval(() => {
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+
+          const userStillExists = users.find(
+            (u) => u.email === loggedUser.email
+          );
+
+          if (!userStillExists) {
+            if (deletedMsg) deletedMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          if (userStillExists.status !== "مفعل") {
+            if (disabledMsg) disabledMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          userCard.style.display = "flex";
+          userName.innerText = userStillExists.username;
+          loginBtn.style.display = "none";
+        }, 1000);
+      } else {
         userCard.style.display = "none";
-        loginBtn.style.display = "none";
-
-        clearInterval(checkUserStatus);
-
-        setTimeout(() => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "../login/log_in.html";
-        }, 2000);
-        return;
+        loginBtn.style.display = "inline-block";
       }
-
-      userCard.style.display = "flex";
-      userName.innerText = userStillExists.username;
-      loginBtn.style.display = "none";
-    }, 1000);
-  } else {
-    userCard.style.display = "none";
-    loginBtn.style.display = "inline-block";
-  }
-</script>
+    </script>
     <script>
       const modalOverlay = document.getElementById("modalOverlayMenu");
       const modalBox = document.getElementById("modalBoxMenu");

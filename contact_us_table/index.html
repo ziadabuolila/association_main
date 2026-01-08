@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../img/association.png" />
+    <link rel="stylesheet" href="../css/contact_us_table.css" />
+    <title>استقبال الرسايل</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../img/association.png" alt="Logo" draggable="false" />
+      </div>
+      <div class="company_name">
+        <h4>جمعية الرحمة الخيرية بعزبة عمرو</h4>
+      </div>
+    </header>
+
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>الاسم الكامل</th>
+            <th>رقم الهاتف</th>
+            <th>البريد الإلكتروني</th>
+            <th>الرسالة</th>
+            <th>الخيارات</th>
+          </tr>
+        </thead>
+        <tbody id="tableBodyMessage"></tbody>
+      </table>
+    </div>
+    <script>
+      const tableBody = document.getElementById("tableBodyMessage");
+
+      function loadMessages() {
+        tableBody.innerHTML = "";
+        let messages =
+          JSON.parse(localStorage.getItem("contactMessages")) || [];
+
+        messages.forEach((msg, index) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${msg.name}</td>
+            <td>${msg.phone}</td>
+            <td>${msg.email}</td>
+            <td>${msg.message}</td>
+            <td>
+              <button class="delete-btn" onclick="deleteMessage(${msg.id})">
+                حذف
+              </button>
+            </td>
+          `;
+
+          tableBody.appendChild(row);
+        });
+      }
+
+      function deleteMessage(id) {
+        let messages =
+          JSON.parse(localStorage.getItem("contactMessages")) || [];
+        messages = messages.filter((msg) => msg.id !== id);
+        localStorage.setItem("contactMessages", JSON.stringify(messages));
+        loadMessages();
+      }
+
+      loadMessages();
+    </script>
+  </body>
+</html>

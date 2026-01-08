@@ -2,22 +2,26 @@
 const container = document.querySelector(".container");
 const registerBtn = document.querySelector(".register-btn");
 const loginBtn = document.querySelector(".login-btn");
+
 registerBtn.addEventListener("click", () => {
   container.classList.add("active");
 });
 loginBtn.addEventListener("click", () => {
   container.classList.remove("active");
 });
+
 // ---- modal ----
 const openBtn = document.getElementById("openModal");
 const modalOverlay = document.getElementById("modalOverlay");
 const modalBox = document.getElementById("modalBox");
+
 openBtn.addEventListener("click", () => {
   modalOverlay.style.display = "flex";
   setTimeout(() => {
     modalBox.classList.add("active");
   }, 50);
 });
+
 modalOverlay.addEventListener("click", (e) => {
   if (e.target === modalOverlay) {
     modalBox.classList.remove("active");
@@ -26,6 +30,8 @@ modalOverlay.addEventListener("click", (e) => {
     }, 500);
   }
 });
+
+// ---- تسجيل مستخدم جديد ----
 function saveUser() {
   const username = document.getElementById("username").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -33,7 +39,6 @@ function saveUser() {
   const confirmPassword = document
     .getElementById("confirmPassword")
     .value.trim();
-
   const statusDiv = document.getElementById("registerStatus");
 
   statusDiv.style.display = "none";
@@ -93,9 +98,10 @@ function saveUser() {
     location.reload();
   }, 500);
 }
+
+// ---- تغيير كلمة المرور ----
 function changePassword(e) {
   e.preventDefault();
-
   const email = document.getElementById("modalEmail").value.trim();
   const newPassword = document.getElementById("modalNewPassword").value.trim();
   const confirmPassword = document
@@ -116,7 +122,6 @@ function changePassword(e) {
   }
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
-
   const userIndex = users.findIndex((u) => u.email === email);
 
   if (userIndex === -1) {
@@ -126,7 +131,6 @@ function changePassword(e) {
   }
 
   users[userIndex].password = newPassword;
-
   localStorage.setItem("users", JSON.stringify(users));
 
   message.style.color = "green";
@@ -138,15 +142,13 @@ function changePassword(e) {
   }, 800);
 }
 
-const LOCK_TIME = 60 * 1000; // مدة الإيقاف المؤقت
-const PERM_OVERLAY_TIME = 2 * 60 * 1000; // 2 دقيقة للنهائي
-
+// ---- القفل المؤقت والنهائي ----
+const LOCK_TIME = 60 * 1000; // دقيقة للقفل المؤقت
 const tempOverlay = document.getElementById("tempLockOverlay");
 const permOverlay = document.getElementById("permLockOverlay");
 const countdownEl = document.getElementById("countdown");
 
 let timerInterval = null;
-let permTimeout = null;
 
 function formatTime(ms) {
   const total = Math.max(0, Math.ceil(ms / 1000));
@@ -155,6 +157,7 @@ function formatTime(ms) {
   return `${m}:${s}`;
 }
 
+// بدء عد القفل المؤقت
 function startTempCountdown(user, users, index) {
   clearInterval(timerInterval);
 
@@ -168,9 +171,7 @@ function startTempCountdown(user, users, index) {
       clearInterval(timerInterval);
 
       user.status = "مفعل";
-      user.failedAttempts = 3; // نحتفظ بعدد المحاولات السابقة
       delete user.tempBlockedUntil;
-
       users[index] = user;
       localStorage.setItem("users", JSON.stringify(users));
 
@@ -185,18 +186,14 @@ function startTempCountdown(user, users, index) {
   timerInterval = setInterval(tick, 1000);
 }
 
+// ---- القفل النهائي ----
 function showPermOverlay() {
   permOverlay.style.display = "flex";
   tempOverlay.style.display = "none";
   document.body.style.overflow = "hidden";
-
-  if (permTimeout) clearTimeout(permTimeout);
-  permTimeout = setTimeout(() => {
-    permOverlay.style.display = "none";
-    document.body.style.overflow = "auto";
-  }, PERM_OVERLAY_TIME);
 }
 
+// ---- تسجيل دخول ----
 function loginUser() {
   const email = loginEmail.value.trim();
   const password = loginPassword.value.trim();
@@ -207,17 +204,28 @@ function loginUser() {
 
   if (index === -1) {
     errorUser.style.display = "block";
+    errorUser.innerText = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
     return;
   }
 
   const user = users[index];
   const now = Date.now();
 
+  // حساب غير مفعل
+  if (user.status === "غير مفعل") {
+    errorStatus.style.display = "block";
+    errorStatus.innerText =
+      "حسابك غير مفعل، برجاء الاتصال بخدمة العملاء لتفعيل الحساب";
+    return;
+  }
+
+  // القفل النهائي
   if (user.status === "موقوف نهائيًا") {
     showPermOverlay();
     return;
   }
 
+  // القفل المؤقت
   if (
     user.status === "موقوف مؤقتًا" &&
     user.tempBlockedUntil &&
@@ -227,6 +235,7 @@ function loginUser() {
     return;
   }
 
+  // التحقق من كلمة المرور
   if (user.password !== password) {
     user.failedAttempts = (user.failedAttempts || 0) + 1;
 
@@ -250,10 +259,11 @@ function loginUser() {
     users[index] = user;
     localStorage.setItem("users", JSON.stringify(users));
     errorUser.style.display = "block";
+    errorUser.innerText = "البريد الإلكتروني أو كلمة المرور غير صحيحة";
     return;
   }
 
-  // ✅ تسجيل دخول صحيح → تحديث آخر تسجيل دخول
+  // تسجيل دخول صحيح
   user.failedAttempts = 0;
   delete user.tempBlockedUntil;
   user.lastLogin = now;
@@ -265,12 +275,22 @@ function loginUser() {
   window.location.href = "../page/index.html";
 }
 
-// عند الضغط على Login
+// عند الضغط على زر Login
 document.getElementById("loginBtn").addEventListener("click", loginUser);
 
-// عند تحميل الصفحة لا يظهر شيء تلقائياً
+// عند تحميل الصفحة → التحقق من حالة القفل بعد الريفرش
 document.addEventListener("DOMContentLoaded", () => {
-  tempOverlay.style.display = "none";
-  permOverlay.style.display = "none";
-  document.body.style.overflow = "auto";
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  users.forEach((user, index) => {
+    if (
+      user.status === "موقوف مؤقتًا" &&
+      user.tempBlockedUntil &&
+      user.tempBlockedUntil > Date.now()
+    ) {
+      startTempCountdown(user, users, index);
+    }
+    if (user.status === "موقوف نهائيًا") {
+      showPermOverlay();
+    }
+  });
 });

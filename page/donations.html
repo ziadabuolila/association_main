@@ -37,7 +37,11 @@
       sizes="16x16"
       href="../img/association.png"
     />
-    <link rel="apple-touch-icon" sizes="180x180" href="../img/association.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/association.png"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -339,7 +343,11 @@
             <li>
               <a href="contact_us.html"> تواصل معنا </a>
             </li>
-            <a href="../login/log_in.html" class="link-page-login-btn" id="loginBtn">
+            <a
+              href="../login/log_in.html"
+              class="link-page-login-btn"
+              id="loginBtn"
+            >
               <button class="login-btn">
                 تسجيل الدخول
                 <i class="fa-solid fa-right-to-bracket"></i>
@@ -362,21 +370,6 @@
                   <li class="element">
                     <i class="fa fa-key"></i>
                     <p class="label">تغيير كلمه المرور</p>
-                  </li>
-                </a>
-              </ul>
-              <div class="separator"></div>
-              <ul class="list">
-                <a href="#">
-                  <li class="element">
-                    <i class="fa fa-bell"></i>
-                    <p class="label">الإشعارات</p>
-                  </li>
-                </a>
-                <a href="#">
-                  <li class="element">
-                    <i class="fa fa-cog"></i>
-                    <p class="label">الإعدادات</p>
                   </li>
                 </a>
               </ul>
@@ -423,7 +416,9 @@
             <span class="msg-text"></span>
           </div>
 
-          <button type="submit" class="btn" onclick="location.reload()">تغيير كلمة المرور</button>
+          <button type="submit" class="btn" onclick="location.reload()">
+            تغيير كلمة المرور
+          </button>
         </form>
       </div>
     </div>
@@ -703,55 +698,54 @@
     <section class="donation-form">
       <h2>نموذج التبرع</h2>
 
-      <form>
+      <form id="donationForm">
         <div class="row">
           <div class="input-box">
             <label>الاسم كامل</label>
-            <input type="text" required />
+            <input type="text" id="fullName" required />
           </div>
           <div class="input-box">
             <label>رقم الهاتف</label>
-            <input type="text" required />
+            <input type="text" id="phone" required />
           </div>
         </div>
 
         <div class="row">
           <div class="input-box">
             <label>البريد الإلكتروني</label>
-            <input type="email" required />
+            <input type="email" id="email" required />
           </div>
           <div class="input-box">
             <label>قيمة التبرع (جنيه)</label>
-            <input type="number" required />
+            <input type="number" id="amount" required />
           </div>
         </div>
 
         <div class="row">
           <div class="input-box">
             <label>نوع التبرع</label>
-            <select id="donationType">
+            <select id="donationType" required>
               <option value="">اختر...</option>
-              <option value="once">تبرع مرة واحدة</option>
-              <option value="monthly">تبرع شهري</option>
+              <option value="مرة واحدة">تبرع مرة واحدة</option>
+              <option value="شهري">تبرع شهري</option>
             </select>
           </div>
 
           <div class="input-box">
             <label>طريقة الدفع</label>
-            <select id="paymentMethod">
+            <select id="paymentMethod" required>
               <option value="">اختر...</option>
-              <option value="visa">فيزا / ماستركارد</option>
-              <option value="vodafone">فودافون كاش</option>
-              <option value="bank">تحويل بنكي</option>
-              <option value="home">تحصيل من المنزل</option>
+              <option value="فيزا / ماستركارد">فيزا / ماستركارد</option>
+              <option value="فودافون كاش">فودافون كاش</option>
+              <option value="تحويل بنكي">تحويل بنكي</option>
+              <option value="تحصيل من المنزل">تحصيل من المنزل</option>
             </select>
           </div>
         </div>
 
-        <!-- extra fields -->
-        <div id="extraData" class="extra"></div>
-
-        <button class="btn-main btn-full">إرسال التبرع</button>
+        <div id="extraData" class="extra animated-box"></div>
+        <div id="successMsg" class="success-msg"></div>
+        <button type="submit" class="btn-main btn-full">إرسال التبرع</button>
       </form>
     </section>
     <!-- ----- Footer ----- -->
@@ -784,125 +778,178 @@
     </footer>
     <!-- ----- Scripts ----- -->
     <script>
-      const payment = document.getElementById("paymentMethod");
-      const extra = document.getElementById("extraData");
+      const form = document.getElementById("donationForm");
+      const paymentMethod = document.getElementById("paymentMethod");
+      const extraData = document.getElementById("extraData");
 
-      payment.addEventListener("change", () => {
-        let val = payment.value;
-        extra.innerHTML = "";
+      // تغيير الحقول حسب طريقة الدفع
+      paymentMethod.addEventListener("change", () => {
+        extraData.classList.remove("show");
+        extraData.innerHTML = "";
 
-        if (val === "visa") {
-          extra.innerHTML = `
-                <div class='row'>
-                    <div class='input-box'>
-                        <label>رقم البطاقة</label>
-                        <input type='text'>
-                    </div>
-                    <div class='input-box'>
-                        <label>CVV</label>
-                        <input type='text'>
-                    </div>
-                </div>
-                <div class='row'>
-                    <div class='input-box'>
-                        <label>تاريخ الانتهاء</label>
-                        <input type='month'>
-                    </div>
-                </div>`;
-        }
+        setTimeout(() => {
+          let html = "";
 
-        if (val === "vodafone") {
-          extra.innerHTML = `
-                <div class='row'>
-                    <div class='input-box'>
-                        <label>رقم فودافون كاش</label>
-                        <input type='text'>
-                    </div>
-                </div>`;
-        }
+          switch (paymentMethod.value) {
+            case "فيزا / ماستركارد":
+              html = `
+          <div class="row">
+            <div class="input-box">
+              <label>رقم البطاقة</label>
+              <input type="text" name="رقم البطاقة" required placeholder="**** **** **** ****">
+            </div>
+            <div class="input-box">
+              <label>CVV</label>
+              <input type="password" name="CVV" required placeholder="***">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-box">
+              <label>تاريخ الانتهاء</label>
+              <input type="month" name="تاريخ الانتهاء" required>
+            </div>
+          </div>`;
+              break;
 
-        if (val === "bank") {
-          extra.innerHTML = `
-                <div class='row'>
-                    <div class='input-box'>
-                        <label>اسم البنك</label>
-                        <input type='text'>
-                    </div>
-                    <div class='input-box'>
-                        <label>رقم الحساب</label>
-                        <input type='text'>
-                    </div>
-                </div>`;
-        }
+            case "فودافون كاش":
+              html = `
+          <div class="row">
+            <div class="input-box">
+              <label>رقم فودافون كاش</label>
+              <input type="text" name="رقم فودافون كاش" required placeholder="01xxxxxxxxx">
+            </div>
+          </div>`;
+              break;
 
-        if (val === "home") {
-          extra.innerHTML = `
-                <div class='row'>
-                    <div class='input-box'>
-                        <label>العنوان بالتفصيل</label>
-                        <input type='text'>
-                    </div>
-                </div>`;
-        }
+            case "تحويل بنكي":
+              html = `
+          <div class="row">
+            <div class="input-box">
+              <label>اسم البنك</label>
+              <input type="text" name="اسم البنك" required>
+            </div>
+            <div class="input-box">
+              <label>رقم الحساب</label>
+              <input type="text" name="رقم الحساب" required>
+            </div>
+          </div>`;
+              break;
+
+            case "تحصيل من المنزل":
+              html = `
+          <div class="row">
+            <div class="input-box">
+              <label>العنوان بالتفصيل</label>
+              <input type="text" name="العنوان" required placeholder="المحافظة - المدينة - الشارع">
+            </div>
+          </div>`;
+              break;
+          }
+
+          extraData.innerHTML = html;
+          if (html) extraData.classList.add("show");
+        }, 200);
+      });
+
+      // عند إرسال النموذج
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let donations = JSON.parse(localStorage.getItem("donations")) || [];
+
+        // تجميع البيانات الإضافية
+        let extraInputs = extraData.querySelectorAll("input");
+        let extraInfo = {};
+
+        extraInputs.forEach((input) => {
+          extraInfo[input.name] = input.value;
+        });
+
+        const donationData = {
+          id: Date.now(),
+          name: document.getElementById("fullName").value,
+          phone: document.getElementById("phone").value,
+          email: document.getElementById("email").value,
+          amount: document.getElementById("amount").value + " جنيه",
+          donationType: document.getElementById("donationType").value,
+          paymentMethod: paymentMethod.value,
+          extraInfo: extraInfo,
+          date: new Date().toLocaleString("ar-EG"),
+        };
+
+        donations.push(donationData);
+        localStorage.setItem("donations", JSON.stringify(donations));
+        const successMsg = document.getElementById("successMsg");
+        successMsg.innerText = "✅ تم إرسال التبرع الخاص بك بنجاح";
+        successMsg.style.display = "block";
+
+        // تعطيل الزر لمنع التكرار
+        form.querySelector("button[type='submit']").disabled = true;
+
+        // ريفرش بعد ثانيتين
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
       });
     </script>
-<script>
-  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
-  const loginBtn = document.getElementById("loginBtn");
-  const userCard = document.getElementById("userCard");
-  const userName = document.getElementById("userName");
+    <script>
+      const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
-  let deletedMsg = document.getElementById("accountDeletedMsg");
-  let disabledMsg = document.getElementById("accountDisabledMsg"); // رسالة تعطيل (اختياري)
+      const loginBtn = document.getElementById("loginBtn");
+      const userCard = document.getElementById("userCard");
+      const userName = document.getElementById("userName");
 
-  if (loggedUser) {
-    const checkUserStatus = setInterval(() => {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
+      let deletedMsg = document.getElementById("accountDeletedMsg");
+      let disabledMsg = document.getElementById("accountDisabledMsg"); // رسالة تعطيل (اختياري)
 
-      const userStillExists = users.find(
-        (u) => u.email === loggedUser.email
-      );
+      if (loggedUser) {
+        const checkUserStatus = setInterval(() => {
+          const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      if (!userStillExists) {
-        if (deletedMsg) deletedMsg.style.display = "block";
+          const userStillExists = users.find(
+            (u) => u.email === loggedUser.email
+          );
 
+          if (!userStillExists) {
+            if (deletedMsg) deletedMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          if (userStillExists.status !== "مفعل") {
+            if (disabledMsg) disabledMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          userCard.style.display = "flex";
+          userName.innerText = userStillExists.username;
+          loginBtn.style.display = "none";
+        }, 1000);
+      } else {
         userCard.style.display = "none";
-        loginBtn.style.display = "none";
-
-        clearInterval(checkUserStatus);
-
-        setTimeout(() => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "../login/log_in.html";
-        }, 2000);
-        return;
+        loginBtn.style.display = "inline-block";
       }
-
-      if (userStillExists.status !== "مفعل") {
-        if (disabledMsg) disabledMsg.style.display = "block";
-
-        userCard.style.display = "none";
-        loginBtn.style.display = "none";
-
-        clearInterval(checkUserStatus);
-
-        setTimeout(() => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "../login/log_in.html";
-        }, 2000);
-        return;
-      }
-
-      userCard.style.display = "flex";
-      userName.innerText = userStillExists.username;
-      loginBtn.style.display = "none";
-    }, 1000);
-  } else {
-    userCard.style.display = "none";
-    loginBtn.style.display = "inline-block";
-  }
-</script>
+    </script>
 
     <script>
       const modalOverlay = document.getElementById("modalOverlayMenu");
@@ -984,7 +1031,6 @@
           // إخفاء المودال
           modalOverlay.classList.add("hide");
 
-          // تنظيف الحقول
           emailInput.value = "";
           passwordInput.value = "";
           confirmInput.value = "";
@@ -996,7 +1042,6 @@
         }, 1200);
       });
     </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
     <script src="../js/main.js"></script>
   </body>

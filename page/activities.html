@@ -37,7 +37,11 @@
       sizes="16x16"
       href="../img/association.png"
     />
-    <link rel="apple-touch-icon" sizes="180x180" href="../img/association.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/association.png"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -160,7 +164,11 @@
             <li>
               <a href="contact_us.html"> تواصل معنا </a>
             </li>
-            <a href="../login/log_in.html" class="link-page-login-btn" id="loginBtn">
+            <a
+              href="../login/log_in.html"
+              class="link-page-login-btn"
+              id="loginBtn"
+            >
               <button class="login-btn">
                 تسجيل الدخول
                 <i class="fa-solid fa-right-to-bracket"></i>
@@ -183,21 +191,6 @@
                   <li class="element">
                     <i class="fa fa-key"></i>
                     <p class="label">تغيير كلمه المرور</p>
-                  </li>
-                </a>
-              </ul>
-              <div class="separator"></div>
-              <ul class="list">
-                <a href="#">
-                  <li class="element">
-                    <i class="fa fa-bell"></i>
-                    <p class="label">الإشعارات</p>
-                  </li>
-                </a>
-                <a href="#">
-                  <li class="element">
-                    <i class="fa fa-cog"></i>
-                    <p class="label">الإعدادات</p>
                   </li>
                 </a>
               </ul>
@@ -244,7 +237,9 @@
             <span class="msg-text"></span>
           </div>
 
-          <button type="submit" class="btn" onclick="location.reload()">تغيير كلمة المرور</button>
+          <button type="submit" class="btn" onclick="location.reload()">
+            تغيير كلمة المرور
+          </button>
         </form>
       </div>
     </div>
@@ -602,63 +597,63 @@
       </div>
     </footer>
     <!-- ----- Scripts ----- -->
-<script>
-  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    <script>
+      const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
-  const loginBtn = document.getElementById("loginBtn");
-  const userCard = document.getElementById("userCard");
-  const userName = document.getElementById("userName");
+      const loginBtn = document.getElementById("loginBtn");
+      const userCard = document.getElementById("userCard");
+      const userName = document.getElementById("userName");
 
-  let deletedMsg = document.getElementById("accountDeletedMsg");
-  let disabledMsg = document.getElementById("accountDisabledMsg"); // رسالة تعطيل (اختياري)
+      let deletedMsg = document.getElementById("accountDeletedMsg");
+      let disabledMsg = document.getElementById("accountDisabledMsg"); // رسالة تعطيل (اختياري)
 
-  if (loggedUser) {
-    const checkUserStatus = setInterval(() => {
-      const users = JSON.parse(localStorage.getItem("users")) || [];
+      if (loggedUser) {
+        const checkUserStatus = setInterval(() => {
+          const users = JSON.parse(localStorage.getItem("users")) || [];
 
-      const userStillExists = users.find(
-        (u) => u.email === loggedUser.email
-      );
+          const userStillExists = users.find(
+            (u) => u.email === loggedUser.email
+          );
 
-      if (!userStillExists) {
-        if (deletedMsg) deletedMsg.style.display = "block";
+          if (!userStillExists) {
+            if (deletedMsg) deletedMsg.style.display = "block";
 
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          if (userStillExists.status !== "مفعل") {
+            if (disabledMsg) disabledMsg.style.display = "block";
+
+            userCard.style.display = "none";
+            loginBtn.style.display = "none";
+
+            clearInterval(checkUserStatus);
+
+            setTimeout(() => {
+              localStorage.removeItem("loggedUser");
+              window.location.href = "../login/log_in.html";
+            }, 2000);
+            return;
+          }
+
+          userCard.style.display = "flex";
+          userName.innerText = userStillExists.username;
+          loginBtn.style.display = "none";
+        }, 1000);
+      } else {
         userCard.style.display = "none";
-        loginBtn.style.display = "none";
-
-        clearInterval(checkUserStatus);
-
-        setTimeout(() => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "../login/log_in.html";
-        }, 2000);
-        return;
+        loginBtn.style.display = "inline-block";
       }
-
-      if (userStillExists.status !== "مفعل") {
-        if (disabledMsg) disabledMsg.style.display = "block";
-
-        userCard.style.display = "none";
-        loginBtn.style.display = "none";
-
-        clearInterval(checkUserStatus);
-
-        setTimeout(() => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "../login/log_in.html";
-        }, 2000);
-        return;
-      }
-
-      userCard.style.display = "flex";
-      userName.innerText = userStillExists.username;
-      loginBtn.style.display = "none";
-    }, 1000);
-  } else {
-    userCard.style.display = "none";
-    loginBtn.style.display = "inline-block";
-  }
-</script>
+    </script>
 
     <script>
       const modalOverlay = document.getElementById("modalOverlayMenu");
@@ -752,7 +747,6 @@
         }, 1200);
       });
     </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
     <script src="../js/main.js"></script>
   </body>
